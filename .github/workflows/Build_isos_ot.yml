@@ -44,6 +44,7 @@ jobs:
         with:
           repository: istoreos/istoreos-oect
           token: ${{ secrets.AC_TOKEN }}
+          ref: istoreos-24.10
           path: openwrt-${{ matrix.model }}
 
       - name: Start build
@@ -84,7 +85,7 @@ jobs:
           mkdir -p artifacts/${{ matrix.model }}
           
           rom=openwrt-${{ matrix.model }}/bin/targets/rockchip/armv8/${{ matrix.output_pattern }}
-          cp -a $rom artifacts/${{ matrix.model }}/istoreos-24.10.4-$(date '+%Y%m%d%H')-oec-squashfs-sysupgrade.img.gz
+          cp -a $rom artifacts/${{ matrix.model }}/istoreos-24.10.5-$(date '+%Y%m%d%H')-oec-squashfs-sysupgrade.img.gz
 
       - name: Upload Firmware Artifacts
         uses: actions/upload-artifact@main
