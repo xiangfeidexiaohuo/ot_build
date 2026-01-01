@@ -44,6 +44,7 @@ jobs:
         with:
           repository: istoreos/istoreos-oect
           token: ${{ secrets.AC_TOKEN }}
+          ref: dev-onething-oec
           path: openwrt-${{ matrix.model }}
 
       - name: Start build
@@ -74,7 +75,10 @@ jobs:
       - name: Build firmware
         working-directory: ./openwrt-${{ matrix.model }}
         run: |
-          date '+%Y%m%d%H' > version
+          VERSION=$(date '+%Y%m%d%H')
+          echo "$VERSION" > version
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
           echo -n 77d4782035a23e6f19f9c4751451b4e3 > .vermagic
           make -j$(nproc) V=s
 
@@ -84,7 +88,7 @@ jobs:
           mkdir -p artifacts/${{ matrix.model }}
           
           rom=openwrt-${{ matrix.model }}/bin/targets/rockchip/armv8/${{ matrix.output_pattern }}
-          cp -a $rom artifacts/${{ matrix.model }}/istoreos-24.10.4-$(date '+%Y%m%d%H')-oec-squashfs-sysupgrade.img.gz
+          cp -a $rom artifacts/${{ matrix.model }}/istoreos-24.10.7-$VERSION-oec-squashfs-sysupgrade.img.gz
 
       - name: Upload Firmware Artifacts
         uses: actions/upload-artifact@main
