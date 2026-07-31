@@ -88,7 +88,7 @@ jobs:
           mkdir -p artifacts/${{ matrix.model }}
           
           rom=openwrt-${{ matrix.model }}/bin/targets/rockchip/armv8/${{ matrix.output_pattern }}
-          cp -a $rom artifacts/${{ matrix.model }}/istoreos-24.10.7-$VERSION-oec-squashfs-sysupgrade.img.gz
+          cp -a $rom artifacts/${{ matrix.model }}/istoreos-24.10.8-$VERSION-oec-squashfs-sysupgrade.img.gz
 
       - name: Upload Firmware Artifacts
         uses: actions/upload-artifact@main
